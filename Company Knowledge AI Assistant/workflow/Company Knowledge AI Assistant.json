@@ -1,0 +1,332 @@
+{
+  "name": "Company Knowledge AI Assistant",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -704,
+        0
+      ],
+      "id": "13ef3602-8a80-40b1-a28d-1fdf0a59e8f2",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.content }}",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -288,
+        160
+      ],
+      "id": "007b37b7-7666-49f2-905e-d9da669b3e6a",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "company_knowledge",
+          "mode": "list",
+          "cachedResultName": "company_knowledge"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        -384,
+        0
+      ],
+      "id": "2d112f4a-a0c2-431e-9333-d00ec04b7a53",
+      "name": "Supabase Vector Store",
+      "credentials": {
+        "supabaseApi": {
+          "id": "Rnt7J3sTaXG5r2pi",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      title: \"Working Hours\",\n      category: \"HR\",\n      source: \"Employee Handbook\",\n      content: \"Northstar Technologies employees normally work from 9:00 AM to 5:00 PM from Monday to Friday. Employees should arrive on time and remain available during their scheduled working hours.\"\n    }\n  },\n  {\n    json: {\n      title: \"Attendance Policy\",\n      category: \"HR\",\n      source: \"HR Policy Manual\",\n      content: \"Employees are expected to maintain regular attendance. Repeated unapproved absences may result in disciplinary action according to company policy.\"\n    }\n  },\n  {\n    json: {\n      title: \"Annual Leave\",\n      category: \"HR\",\n      source: \"Employee Handbook\",\n      content: \"Full time employees receive 20 days of annual paid leave per calendar year. Leave requests should normally be submitted through the employee portal before the planned absence.\"\n    }\n  },\n  {\n    json: {\n      title: \"Sick Leave\",\n      category: \"HR\",\n      source: \"HR Policy Manual\",\n      content: \"Employees may request sick leave when they are unable to work because of illness. A medical certificate may be required for extended periods of absence.\"\n    }\n  },\n  {\n    json: {\n      title: \"Remote Work\",\n      category: \"HR\",\n      source: \"Remote Work Policy\",\n      content: \"Eligible employees may work remotely up to two days per week with prior approval from their manager. Employees working remotely must remain reachable during normal working hours.\"\n    }\n  },\n  {\n    json: {\n      title: \"Overtime\",\n      category: \"HR\",\n      source: \"HR Policy Manual\",\n      content: \"Overtime work requires manager approval before the additional hours are worked. Approved overtime is compensated according to company policy.\"\n    }\n  },\n  {\n    json: {\n      title: \"Probation Period\",\n      category: \"HR\",\n      source: \"Employee Handbook\",\n      content: \"New employees normally complete a three month probation period. During probation, performance and suitability for the role are evaluated by the employee's manager.\"\n    }\n  },\n  {\n    json: {\n      title: \"Promotions\",\n      category: \"HR\",\n      source: \"Career Development Policy\",\n      content: \"Promotions are based on performance, skills, experience, business requirements and demonstrated readiness for the next role.\"\n    }\n  },\n  {\n    json: {\n      title: \"Password Policy\",\n      category: \"IT\",\n      source: \"Information Security Policy\",\n      content: \"Employees must use strong passwords and must not share passwords with other people. Company passwords should not be reused on personal websites.\"\n    }\n  },\n  {\n    json: {\n      title: \"VPN Access\",\n      category: \"IT\",\n      source: \"IT Security Guide\",\n      content: \"Employees accessing internal company resources from outside the office must use the approved company VPN.\"\n    }\n  },\n  {\n    json: {\n      title: \"Laptop Policy\",\n      category: \"IT\",\n      source: \"IT Equipment Policy\",\n      content: \"Company laptops are provided for authorized business activities. Employees are responsible for protecting company equipment from theft, damage and unauthorized access.\"\n    }\n  },\n  {\n    json: {\n      title: \"Software Requests\",\n      category: \"IT\",\n      source: \"IT Service Desk Guide\",\n      content: \"Employees requiring new software should submit a request through the IT service desk. IT will review the request for licensing, security and compatibility requirements.\"\n    }\n  },\n  {\n    json: {\n      title: \"Security Incidents\",\n      category: \"IT\",\n      source: \"Information Security Policy\",\n      content: \"Suspected security incidents such as phishing, malware or unauthorized access must be reported immediately to the IT security team.\"\n    }\n  },\n  {\n    json: {\n      title: \"Salary Payment\",\n      category: \"Finance\",\n      source: \"Payroll Policy\",\n      content: \"Employee salaries are processed monthly and are normally deposited into the employee's registered bank account according to the payroll schedule.\"\n    }\n  },\n  {\n    json: {\n      title: \"Expense Reimbursement\",\n      category: \"Finance\",\n      source: \"Expense Policy\",\n      content: \"Employees can request reimbursement for approved business expenses by submitting receipts and supporting documentation through the expense system.\"\n    }\n  },\n  {\n    json: {\n      title: \"Travel Expenses\",\n      category: \"Finance\",\n      source: \"Travel Policy\",\n      content: \"Business travel expenses must comply with the company's travel policy. Employees should retain receipts for eligible transportation, accommodation and other approved expenses.\"\n    }\n  },\n  {\n    json: {\n      title: \"Office Locations\",\n      category: \"General\",\n      source: \"Company Directory\",\n      content: \"Northstar Technologies operates offices in Islamabad, Lahore and Karachi. Employees should use the office location assigned to their department unless alternative arrangements are approved.\"\n    }\n  },\n  {\n    json: {\n      title: \"Employee Support\",\n      category: \"General\",\n      source: \"Employee Support Guide\",\n      content: \"Employees can contact HR for employment related questions and IT support for technical problems affecting company systems or equipment.\"\n    }\n  },\n  {\n    json: {\n      title: \"Company Holidays\",\n      category: \"General\",\n      source: \"Holiday Calendar\",\n      content: \"The company publishes its annual holiday calendar before the beginning of each calendar year. Employees should consult the official calendar for exact holiday dates.\"\n    }\n  },\n  {\n    json: {\n      title: \"Office Access\",\n      category: \"General\",\n      source: \"Security Policy\",\n      content: \"Employees must use their authorized access cards when entering company offices and must not lend their access cards to other individuals.\"\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -544,
+        0
+      ],
+      "id": "8d6eb696-a5ad-4201-9811-e9ecf0f41689",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        160
+      ],
+      "id": "d3eecb8e-7444-4813-a055-517e44e95995",
+      "name": "Embeddings Google Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "FXNPPWUzNEuCZ3Yg",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chunkSize": 500,
+        "chunkOverlap": 50,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        320
+      ],
+      "id": "36f4fe52-15f3-47ca-ac3b-4d645f99005c",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -128,
+        -176
+      ],
+      "id": "db1ab14c-ce81-47a9-9391-698525d5fefb",
+      "name": "When chat message received",
+      "webhookId": "96307fe2-9241-4d44-a204-eb6612ceeadb"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        48,
+        -176
+      ],
+      "id": "5e893348-9ca5-4c53-9d33-df331f974b6b",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.1-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        48,
+        -32
+      ],
+      "id": "6a5087d3-51e8-4e56-a0cb-a441f7f60270",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "FXNPPWUzNEuCZ3Yg",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Search the company knowledge base for official company policies,\nrules, procedures, benefits, departments, locations, employee\ninformation, IT policies, finance policies, and other internal\ncompany knowledge. Use this tool whenever the user's question\nmay be answered from company information.",
+        "tableName": {
+          "__rl": true,
+          "value": "company_knowledge",
+          "mode": "list",
+          "cachedResultName": "company_knowledge"
+        },
+        "topK": 5,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        240,
+        32
+      ],
+      "id": "ed6c8729-2440-4e8e-8fb9-931f70970419",
+      "name": "Supabase Vector Store1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "Rnt7J3sTaXG5r2pi",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        256,
+        208
+      ],
+      "id": "c064a59e-3318-4601-a91f-9d1c89b0de03",
+      "name": "Embeddings Google Gemini1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "FXNPPWUzNEuCZ3Yg",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        144,
+        0
+      ],
+      "id": "45f321a3-4715-473e-9019-24433556d064",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "835a594c-6c33-4d89-acb5-4202cc9da460",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c3cb54e1d540d3c0b04170702b697fe90c7d879be4a3aa2f62ed1a03c27d9596"
+  },
+  "nodeGroups": [],
+  "id": "VvSFRTmroetPDA4w",
+  "tags": []
+}
